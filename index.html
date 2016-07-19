@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>PageSpeed Tool</title>
+    <link rel="icon" href="favicon.ico">
+  </head>
+  <body>
+    <label>Your website URL:
+      <input type="text"
+             name="targetURL"
+             class="pst__input"
+             value=""
+             placeholder="http://mywebsite.com"
+             tabindex="1"
+             autofocus="true">
+    </label>
+
+    <button type="button"
+            name="button"
+            class="pst__send"
+            tabindex="2">Send
+    </button>
+
+    <div class="pst__result"></div>
+
+    <script src="./lib/pagespeed-tool.js"></script>
+    <script>new PST('.pst__result', '.pst__send', '.pst__input');</script>
+  </body>
+</html>
