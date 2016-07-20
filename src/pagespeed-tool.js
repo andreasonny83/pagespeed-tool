@@ -5,6 +5,7 @@ class PST {
     this.targetEl = document.querySelector(target);
     this.buttonEl = document.querySelector(button);
     this.inputEl = document.querySelector(input);
+    this.stat = [];
 
     this.xhttp = new XMLHttpRequest();
 
@@ -12,11 +13,50 @@ class PST {
     this.buttonEl.addEventListener('click', this.sendURL.bind(this));
   }
 
-  updatePageStat(res) {
-    let data = document.createTextNode(JSON.stringify(res));
-
+  renderPage() {
+    // https://github.com/addyosmani/psi
     this.targetEl.innerHTML = '';
-    this.targetEl.appendChild(data);
+    let title;
+    let strategy;
+    let score;
+    let usability;
+    let cssSize;
+    let htmlSize;
+    let jsSize;
+    let cssResources;
+    let jsResources;
+    let totSize;
+    let leverageBrowserCaching;
+    let minifyJs;
+    let minifyRenderBlockingRes;
+    let sizeTapTargets;
+
+    if (this.stat[0].responseCode === 200 &&
+        !!this.stat[0].title) {
+      title = document.createElement('h2');
+      let text = document.createTextNode(this.stat[0].title +
+                                         ' pagespeed result:');
+      title.appendChild(text);
+    }
+
+    if (this.stat[0].ruleGroups &&
+        this.stat[0].ruleGroups.SPEED &&
+        this.stat[0].ruleGroups.SPEED.score) {
+      score = document.createElement('h3');
+      let text = document.createTextNode('Score: ' +
+                                         this.stat[0].ruleGroups.SPEED.score);
+      score.appendChild(text);
+    }
+
+    this.targetEl.appendChild(title);
+    this.targetEl.appendChild(score);
+  }
+
+  updatePageStat(res) {
+    this.stat.push(res);
+    console.log(this.stat);
+
+    this.renderPage();
   }
 
   reqListener(e) {

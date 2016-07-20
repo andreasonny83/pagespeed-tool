@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>PageSpeed Tool</title>
-    <link rel="icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=1" />
   </head>
   <body>
     <label>Your website URL:
@@ -24,7 +24,14 @@
 
     <div class="pst__result"></div>
 
+
+    <script src="./src/pagespeed-tool.js"></script>
+    <!--
+    In production run npm run build to parse the script into ES2015
+    then include the lib/pagespeed-tool.js instead of the src one:
+
     <script src="./lib/pagespeed-tool.js"></script>
+    -->
     <script>new PST('.pst__result', '.pst__send', '.pst__input');</script>
   </body>
 </html>
